@@ -104,7 +104,56 @@ const playGame = (function () {
     resetBtn.addEventListener('click', startOver)
 })()
 }
+const playComputer = (function () {
+    const cellElements = document.querySelectorAll('.boardSquare')
+    let playerTurn
+    let computer
+    cellElements.forEach(cell => {
+        cell.addEventListener('click', handleClick, {once: true})
+    })
+    function handleClick(e) {
+        const cell = e.target
+        
+        placeMark(cell)
+    }
+    function placeMark(cell) {
+        cell.textContent = 'X'
+        //addToArray(totalChoices)
+        let boardArray = Array.from(cellElements)
+        //console.log(boardArray[1].textContent)
+        let theArray = ["","","","","","","","",""]
+        
+        let totalChoices = 9
+        for (let i = 0; i < boardArray.length; i++) {
+            theArray.splice(i,1,boardArray[i].textContent)
+        }
+        theArray.map((square, index) => {
+            //console.log(square,index)
+            if (square !== "") {
+                //console.log(`the index is ${index} and square is ${square}`)
+                
+            } else return false
+            for (let i = 0; i < boardArray[i]; i++) {
+                if (boardArray[i].textContent == "") {
+                    theArray.splice(i,1,'O')
+                     boardArray[i].textContent = 'O'
+                     break
+                } else return
+            }
+            //boardArray[random(theArray.length)].textContent = 'O'
+            //theArray.splice(index,1,'O')
+        })
 
+        //console.log(theArray)
+        //console.log(totalChoices)
+        //return theArray, boardArray
+    }
+    function random(num) {
+        return Math.floor(Math.random() * num)
+        
+        
+    }
+})()
 
 const startMenu = (function () {
     document.querySelector('.startGame').addEventListener('click', playHuman)
