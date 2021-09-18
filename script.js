@@ -1,10 +1,13 @@
-let theArray = ["","","","","","","","",""]
+let theArray = ["", "", "", "", "", "", "", "", ""]
 const playGame = (function () {
     const cellElements = document.querySelectorAll('.boardSquare')
     let circleTurn
     cellElements.forEach(cell => {
-        cell.addEventListener('click', handleClick, { once: true })
+        cell.addEventListener('click', handleClick, {
+            once: true
+        })
     })
+
     function handleClick(e) {
         const cell = e.target
         console.log(e.target)
@@ -13,28 +16,32 @@ const playGame = (function () {
         addToArray()
         checkWinner()
     }
+
     function placeMark(cell, currentPlayer) {
         cell.textContent = currentPlayer
         switchTurns()
     }
-    function switchTurns () {
+
+    function switchTurns() {
         circleTurn = !circleTurn
     }
-    function addToArray () {
+
+    function addToArray() {
         let boardArray = Array.from(cellElements)
         for (let i = 0; i < boardArray.length; i++) {
             if (boardArray[i].textContent !== "")
-            theArray.splice(i,1,boardArray[i].textContent)
+                theArray.splice(i, 1, boardArray[i].textContent)
         }
         return theArray
     }
-    function checkWinner () {
+
+    function checkWinner() {
         let winningScreen = document.querySelector('#end')
         if (theArray[0] == theArray[1] && theArray[1] == theArray[2] && theArray[0] !== "") {
             assignWinner()
             winningScreen.classList.add('showEndScreen')
             return
-        } else if (theArray[3] == theArray[4] && theArray[4] == theArray[5] && theArray[3]  !== "") {
+        } else if (theArray[3] == theArray[4] && theArray[4] == theArray[5] && theArray[3] !== "") {
             winningScreen.classList.add('showEndScreen')
             assignWinner()
             return
@@ -66,25 +73,26 @@ const playGame = (function () {
             winningScreen.classList.add('showEndScreen')
             assignWinner()
             return
-        } 
-        if (theArray[0] && theArray[1] && theArray[2] && theArray[3] && theArray[4] &&theArray[5] && theArray[6] && theArray[7] && theArray[8] !== "") {
-            
+        }
+        if (theArray[0] && theArray[1] && theArray[2] && theArray[3] && theArray[4] && theArray[5] && theArray[6] && theArray[7] && theArray[8] !== "") {
             winningScreen.classList.add('showEndScreen')
-             draw = true
-             return assignWinner(draw)
+            draw = true
+            return assignWinner(draw)
         }
     }
-    function assignWinner (draw) {
+
+    function assignWinner(draw) {
+        let endingMessage = document.querySelector('#announcement')
         if (draw) {
-             return alert(`It's a draw.`)
+            return endingMessage.textContent = `It's a draw.`
         }
         if (circleTurn == true) {
-            winner = "X"
-        } else winner = "Circle"
-        alert(`The winner is ${winner}`)
+            return endingMessage.textContent = `The winner is X`
+        } else return endingMessage.textContent = `The winner is O`
     }
-    function startOver () {
-           window.location.reload()
+
+    function startOver() {
+        window.location.reload()
     }
     let resetBtn = document.querySelector('.restart')
     resetBtn.addEventListener('click', startOver)
