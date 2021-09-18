@@ -1,3 +1,5 @@
+function playHuman () {
+    document.querySelector('.startScreen').classList.add('startScreenShow')
 let theArray = ["", "", "", "", "", "", "", "", ""]
 const playGame = (function () {
     const cellElements = document.querySelectorAll('.boardSquare')
@@ -23,7 +25,11 @@ const playGame = (function () {
     }
 
     function switchTurns() {
-        circleTurn = !circleTurn
+        if (circleTurn) {
+            circleTurn = false
+        } else circleTurn = true
+        //circleTurn = true
+        //!circleTurn
     }
 
     function addToArray() {
@@ -96,4 +102,10 @@ const playGame = (function () {
     }
     let resetBtn = document.querySelector('.restart')
     resetBtn.addEventListener('click', startOver)
+})()
+}
+
+
+const startMenu = (function () {
+    document.querySelector('.startGame').addEventListener('click', playHuman)
 })()
