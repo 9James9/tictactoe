@@ -1,46 +1,55 @@
+let theArray = ["","","","","","","","",""]
 const playGame = (function () {
-    chooseTeam = () => {
-        const chooseX = document.querySelector('#chooseX')
-        const chooseO = document.querySelector('#chooseO')
-        chooseX.addEventListener('click', () => {
-            console.log('X')
-            return team = 'X'  
-        })
-        chooseO.addEventListener('click', () => {
-            console.log("O")
-             return team = "O"
-        })
+    const cellElements = document.querySelectorAll('.boardSquare')
+    let circleTurn
+    cellElements.forEach(cell => {
+        cell.addEventListener('click', handleClick, { once: true })
+    })
+    function handleClick(e) {
+        const cell = e.target
+        console.log(e.target)
+        const currentPlayer = circleTurn ? 'O' : 'X'
+        placeMark(cell, currentPlayer)
+        addToArray()
+        checkWinner()
     }
-    squares = () => {
-        let tiles = ["","","","","","","","",""]
-        const eachSquare = document.querySelectorAll('.boardSquare')
-        let gameBoard = Array.from(eachSquare)
-        for (let i = 0; i < gameBoard.length; i++) {
-            gameBoard[i].addEventListener('click', () => {
-                if (gameBoard[i].textContent == "") {
-                console.log(i)
-                gameBoard[i].textContent = team
-                tiles.splice(i, 1 , team)
-                console.log(tiles)
-                } else alert('you must pick another')
-            })
+    function placeMark(cell, currentPlayer) {
+        cell.textContent = currentPlayer
+        switchTurns()
+    }
+    function switchTurns () {
+        circleTurn = !circleTurn
+    }
+    function addToArray () {
+        let boardArray = Array.from(cellElements)
+        for (let i = 0; i < boardArray.length; i++) {
+            if (boardArray[i].textContent !== "")
+            theArray.splice(i,1,boardArray[i].textContent)
+        
         }
-        return gameBoard
+        return theArray
     }
-    reset = () => {
-        document.querySelector('#reset').addEventListener('click', () => {
-        tiles = ["","","","","","","","",""]
-        let allItems = document.querySelectorAll('.boardSquare')
-        for (let i in allItems) {
-            allItems[i].textContent = ""
+    function checkWinner () {
+        if (theArray[0] == theArray[1] && theArray[1] == theArray[2] && theArray[0] !== "") {
+            alert('horizontal win')
+        } else if (theArray[3] == theArray[4] && theArray[4] == theArray[5] && theArray[3]  !== "") {
+            alert('horizontal win')
+        } else if (theArray[6] == theArray[7] && theArray[7] == theArray[8] && theArray[6] !== "") {
+            alert('horizontal win')
         }
-        return
-        })
+        //vertical
+        if (theArray[0] == theArray[3] && theArray[3] == theArray[6] && theArray[0] !== "") {
+            alert('vertical win')
+        } else if (theArray[1] == theArray[4] && theArray[4] == theArray[7] && theArray[1] !== "") {
+            alert('vertical win')
+        } else if (theArray[2] == theArray[5] && theArray[5] == theArray[8] && theArray[2] !== "") {
+            alert('vertical win')
+        }
+        //diagonal
+        if (theArray[0] == theArray[4] && theArray[4] == theArray[8] && theArray[0] !== "") {
+            alert('diagonal win')
+        } else if (theArray[2] == theArray[4] && theArray[4] == theArray[6] && theArray[2] !== "") {
+            alert ('diagonal win')
+        }
     }
-    
-    return chooseTeam(), reset()
-    })()
-squares()
-
-
-
+})()
