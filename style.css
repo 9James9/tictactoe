@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+.boardSquare {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  border: 5px solid black;
+}
+#gameBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 0px;
+  grid-auto-rows: minmax(100px, auto);
+}
+#mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
