@@ -20,3 +20,9 @@
     align-items: center;
     justify-content: center;
 }
+.endScreen {
+  display: none;
+}
+.showEndScreen {
+  display: flex;
+}
