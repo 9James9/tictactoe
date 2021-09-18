@@ -1,4 +1,4 @@
-const gameBoard = (function () {
+const playGame = (function () {
     chooseTeam = () => {
         const chooseX = document.querySelector('#chooseX')
         const chooseO = document.querySelector('#chooseO')
@@ -12,32 +12,35 @@ const gameBoard = (function () {
         })
     }
     squares = () => {
-        
         let tiles = ["","","","","","","","",""]
         const eachSquare = document.querySelectorAll('.boardSquare')
         let gameBoard = Array.from(eachSquare)
         for (let i = 0; i < gameBoard.length; i++) {
             gameBoard[i].addEventListener('click', () => {
+                if (gameBoard[i].textContent == "") {
                 console.log(i)
                 gameBoard[i].textContent = team
                 tiles.splice(i, 1 , team)
                 console.log(tiles)
+                } else alert('you must pick another')
             })
         }
-        
-    checkIndex = (event) => {
-        console.log(Array.from(event).indexOf(event,target))
+        return gameBoard
     }
-        
-        /*eachSquare.forEach(square => {
-            document.addEventListener('click', () => {
-                square.textContent = 'O'
-            } )
-            
+    reset = () => {
+        document.querySelector('#reset').addEventListener('click', () => {
+        tiles = ["","","","","","","","",""]
+        let allItems = document.querySelectorAll('.boardSquare')
+        for (let i in allItems) {
+            allItems[i].textContent = ""
+        }
+        return
         })
-        */
-        return tiles, chooseTeam()
     }
     
+    return chooseTeam(), reset()
     })()
 squares()
+
+
+
