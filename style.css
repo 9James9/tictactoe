@@ -50,7 +50,7 @@
 
 }
 .startScreen {
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -76,4 +76,16 @@
 }
 .startScreenShow {
   display: none;
+}
+.boardSquare.one, .boardSquare.two, .boardSquare.three {
+  border-top: none;
+}
+.boardSquare.one, .boardSquare.four, .boardSquare.seven {
+  border-left: none;
+}
+.boardSquare.three, .boardSquare.six, .boardSquare.nine {
+  border-right: none;
+}
+.boardSquare.seven, .boardSquare.eight, .boardSquare.nine {
+  border-bottom: none;
 }
