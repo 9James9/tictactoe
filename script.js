@@ -118,6 +118,7 @@ const playComputer = (function () {
 
         placeMark(cell)
         computerPlay()
+        checkWinner()
     }
 
     function placeMark(cell) {
@@ -126,6 +127,7 @@ const playComputer = (function () {
 
     function computerPlay() {
         let available = []
+        
         if (document.querySelector('.boardSquare.one').textContent == '') {
             available.push(document.querySelector('.boardSquare.one'))
         }
@@ -157,8 +159,113 @@ const playComputer = (function () {
         console.log(available)
         let theChoice = random(available.length)
         available[theChoice].textContent = 'O'
+        
     }
-
+    function checkWinner() {
+        let one = (document.querySelector('.boardSquare.one').textContent)
+        let two = (document.querySelector('.boardSquare.two').textContent)
+        let three = (document.querySelector('.boardSquare.three').textContent)
+        let four = (document.querySelector('.boardSquare.four').textContent)
+        let five = (document.querySelector('.boardSquare.five').textContent)
+        let six = (document.querySelector('.boardSquare.six').textContent)
+        let seven = (document.querySelector('.boardSquare.seven').textContent)
+        let eight = (document.querySelector('.boardSquare.eight').textContent)
+        let nine = (document.querySelector('.boardSquare.nine').textContent)
+        if (one == two && two == three) {
+            //horizontals
+            if (one == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (one == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        if (four == five && five == six) {
+            if (four == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (four == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        if (seven == eight && eight == nine) {
+            if (seven == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (seven == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        //verticals
+        if (one == four && four == seven) {
+            if (one == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (one == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        if (two == five && five == eight) {
+            if (two == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (two == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        if (three == six && six == nine) {
+            if (three == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (three == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        //diagonals
+        if (one == five && five == nine) {
+            if (one == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (one == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+        if (three == five && six == nine) {
+            if (three == 'X') {
+                alert('You win')
+                //assignWinner('X')
+            } else if (three == 'O') {
+                alert('You lose')
+                //assignWinner('O')
+            }
+            
+        }
+    }
+    function assignWinner(lastMove) {
+        let endingMessage = document.querySelector('#announcement')
+        
+        if (lastMove == 'X') {
+            return endingMessage.textContent = `You win!`
+        } else if (lastMove == 'O') {
+            return endingMessage.textContent = `The computer wins`
+        } else {
+            return endingMessage.textContent = `Draw`
+        }
+    }
     function random(num) {
         return Math.floor(Math.random() * num)
     }
