@@ -105,7 +105,10 @@ function playHuman() {
     })()
 }
 
-const playComputer = (function () {
+
+
+    function playComputer() {
+        document.querySelector('.startScreen').classList.add('startScreenShow')
     const cellElements = document.querySelectorAll('.boardSquare')
     cellElements.forEach(cell => {
         cell.addEventListener('click', handleClick, {
@@ -127,7 +130,7 @@ const playComputer = (function () {
 
     function computerPlay() {
         let available = []
-        
+       
         if (document.querySelector('.boardSquare.one').textContent == '') {
             available.push(document.querySelector('.boardSquare.one'))
         }
@@ -244,7 +247,7 @@ const playComputer = (function () {
             }
             
         }
-        if (three == five && six == nine) {
+        if (three == five && five == seven) {
             if (three == 'X') {
                 alert('You win')
                 //assignWinner('X')
@@ -269,8 +272,13 @@ const playComputer = (function () {
     function random(num) {
         return Math.floor(Math.random() * num)
     }
-})()
+}
 
 const startMenu = (function () {
-    document.querySelector('.startGame').addEventListener('click', playHuman)
+    document.querySelector('#humanGame').addEventListener('click', playHuman)
+    document.querySelector('#computerGame').addEventListener('click', playComputer)
 })()
+//todo: clean up spaghetti code once i get everything working
+//add end screen to computer mode and set up reset button
+//add more design elements
+//add "it's a draw" to computer mode when out of moves
