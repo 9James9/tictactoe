@@ -130,7 +130,7 @@ function playHuman() {
 
     function computerPlay() {
         let available = []
-       
+       //if a square is empty, put it into the available array
         if (document.querySelector('.boardSquare.one').textContent == '') {
             available.push(document.querySelector('.boardSquare.one'))
         }
@@ -158,9 +158,9 @@ function playHuman() {
         if (document.querySelector('.boardSquare.nine').textContent == '') {
             available.push(document.querySelector('.boardSquare.nine'))
         } 
-        console.log(random(available.length))
-        console.log(available)
+        //choose random number based on the length of the avalailable array
         let theChoice = random(available.length)
+        //update the textContent of that index with the computer's move
         available[theChoice].textContent = 'O'
         
     }
