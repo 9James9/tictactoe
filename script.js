@@ -31,8 +31,6 @@ function playHuman() {
             if (circleTurn) {
                 circleTurn = false
             } else circleTurn = true
-            //circleTurn = true
-            //!circleTurn
         }
 
         function addToArray() {
