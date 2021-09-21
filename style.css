@@ -69,6 +69,7 @@
   display: flex;
   width: 30vw;
   border: 5px solid black;
+  justify-content: center;
 }
 .startGame:hover {
   background-color: black;

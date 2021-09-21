@@ -14,6 +14,9 @@ function playHuman() {
             const cell = e.target
             console.log(e.target)
             const currentPlayer = circleTurn ? 'O' : 'X'
+            if (cell.textContent == 'X' || cell.textContent == 'O') {
+                return false
+            }
             placeMark(cell, currentPlayer)
             addToArray()
             checkWinner()
@@ -44,41 +47,42 @@ function playHuman() {
         function checkWinner() {
             let winningScreen = document.querySelector('#end')
             if (theArray[0] == theArray[1] && theArray[1] == theArray[2] && theArray[0] !== "") {
-                assignWinner()
+                
                 winningScreen.classList.add('showEndScreen')
-                return
+                return assignWinner()
+                
             } else if (theArray[3] == theArray[4] && theArray[4] == theArray[5] && theArray[3] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             } else if (theArray[6] == theArray[7] && theArray[7] == theArray[8] && theArray[6] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             }
             //vertical
             if (theArray[0] == theArray[3] && theArray[3] == theArray[6] && theArray[0] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             } else if (theArray[1] == theArray[4] && theArray[4] == theArray[7] && theArray[1] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             } else if (theArray[2] == theArray[5] && theArray[5] == theArray[8] && theArray[2] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             }
             //diagonal
             if (theArray[0] == theArray[4] && theArray[4] == theArray[8] && theArray[0] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             } else if (theArray[2] == theArray[4] && theArray[4] == theArray[6] && theArray[2] !== "") {
                 winningScreen.classList.add('showEndScreen')
-                assignWinner()
-                return
+                return assignWinner()
+                
             }
             if (theArray[0] && theArray[1] && theArray[2] && theArray[3] && theArray[4] && theArray[5] && theArray[6] && theArray[7] && theArray[8] !== "") {
                 winningScreen.classList.add('showEndScreen')
@@ -118,8 +122,11 @@ function playHuman() {
 
     function handleClick(e) {
         const cell = e.target
-
+        if (cell.textContent == 'X' || cell.textContent == 'O') {
+            return false
+        }
         placeMark(cell)
+        checkWinner()
         computerPlay()
         checkWinner()
     }
@@ -162,7 +169,7 @@ function playHuman() {
         let theChoice = random(available.length)
         //update the textContent of that index with the computer's move
         available[theChoice].textContent = 'O'
-        
+        checkWinner()
     }
     function checkWinner() {
         let one = (document.querySelector('.boardSquare.one').textContent)
@@ -177,97 +184,94 @@ function playHuman() {
         if (one == two && two == three) {
             //horizontals
             if (one == 'X') {
-                alert('You win')
-                //assignWinner('X')
+               return assignWinner('X')
             } else if (one == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         if (four == five && five == six) {
             if (four == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (four == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         if (seven == eight && eight == nine) {
             if (seven == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (seven == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         //verticals
         if (one == four && four == seven) {
             if (one == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (one == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         if (two == five && five == eight) {
             if (two == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (two == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         if (three == six && six == nine) {
             if (three == 'X') {
-                alert('You win')
-                //assignWinner('X')
+
+                return assignWinner('X')
             } else if (three == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         //diagonals
         if (one == five && five == nine) {
             if (one == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (one == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
         }
         if (three == five && five == seven) {
             if (three == 'X') {
-                alert('You win')
-                //assignWinner('X')
+                return assignWinner('X')
             } else if (three == 'O') {
-                alert('You lose')
-                //assignWinner('O')
+                return assignWinner('O')
             }
             
+        } 
+        if (one !== '' && two !== '' && three !== '' && four !== '' && five !== '' && six !== '' && seven !== '' && eight !== '' & nine !== '') {
+            return assignWinner('Draw')
         }
+        
     }
     function assignWinner(lastMove) {
         let endingMessage = document.querySelector('#announcement')
-        
+        let endScreen = document.querySelector('#end')
+        endScreen.classList.add('showEndScreen')
         if (lastMove == 'X') {
-            return endingMessage.textContent = `You win!`
+             endingMessage.textContent = `You win!`
         } else if (lastMove == 'O') {
-            return endingMessage.textContent = `The computer wins`
+             endingMessage.textContent = `The computer wins`
         } else {
-            return endingMessage.textContent = `Draw`
+             endingMessage.textContent = `Draw`
         }
+        reset()
+    }
+    function reset() {
+        const resetBtn = document.querySelector('.restart')
+        resetBtn.addEventListener('click', () => {
+            window.location.reload()
+        })
     }
     function random(num) {
         return Math.floor(Math.random() * num)
@@ -278,7 +282,4 @@ const startMenu = (function () {
     document.querySelector('#humanGame').addEventListener('click', playHuman)
     document.querySelector('#computerGame').addEventListener('click', playComputer)
 })()
-//todo: clean up spaghetti code once i get everything working
-//add end screen to computer mode and set up reset button
-//add more design elements
-//add "it's a draw" to computer mode when out of moves
+
